@@ -11,7 +11,7 @@ hass.io
 DD-WRT
 
 ### Steckdosen
-OBI2 mit Tasmota
+OBI2 mit Tasmota (https://github.com/arendst/Sonoff-Tasmota/wiki/OBI-Socket-2)
 
 ### Schalter 
 Shelly 1 + 2
