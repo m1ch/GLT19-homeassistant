@@ -13,11 +13,11 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: http://hassio.local:8123/hassio/ingress/core_configurator
+#panel_iframe:
+#  configurator:
+#    title: Configurator
+#    icon: mdi:wrench
+#    url: http://hassio.local:8123/hassio/ingress/core_configurator
 
 #mqtt:
 #  broker: localhost
