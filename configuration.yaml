@@ -1,0 +1,124 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 47.0833
+  longitude: 15.5667
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Vienna
+  # Customization file
+  customize: !include customize.yaml
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://hassio.local:8123/hassio/ingress/core_configurator
+
+#mqtt:
+#  broker: localhost
+#  port: 1883
+#  username: 'hass'
+#  password: 'glt19'
+
+
+mqtt:
+#  broker: hassio.local
+  broker: localhost
+  port: 1883
+  client_id: hass
+  keepalive: 60
+  username: 'hass'
+  password: 'glt19'
+  #  certificate: /home/paulus/dev/addtrustexternalcaroot.crt
+  protocol: 3.1
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+    qos: 1
+    retain: true
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+    qos: 1
+    retain: true
+    
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Show the introduction message on startup.
+introduction:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Discover some devices automatically
+discovery:
+
+# Sensors
+sensor:
+  # Weather prediction
+  - platform: yr
+  
+
+# Text to speech
+tts:
+  - platform: google
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+light:
+  - platform: mqtt
+    name: "LED light"
+    # command_topic: "/br38/sonoff/switch/SONOFF_A751BC/relay/0"
+    # state_topic: "/br38/sonoff/switch/SONOFF_A751BC/relay/0"
+    command_topic: "cmnd/sonoffled/POWER"
+    state_topic: "stat/sonoffled/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    availability_topic: "tele/sonoffled/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    rgb_command_topic: "cmnd/sonoffled/Color"
+    rgb_state_topic: "stat/sonoffled/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    brightness_command_topic: "cmnd/sonoffled/Dimmer"
+    brightness_state_topic: "stat/sonoffled/RESULT"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    brightness_scale: 100
+    optimistic: false
+    # retain: true
+
+switch:
+  - platform: mqtt
+    name: "Steckdose01"
+    # friendly_name: "Ventilator"
+    command_topic: "cmnd/sonoff01/POWER"
+    state_topic: "stat/sonoff01/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+  - platform: mqtt
+    name: "Steckdose02"
+    # friendly_name: "Ventilator"
+    command_topic: "cmnd/sonoff02/POWER"
+    state_topic: "stat/sonoff02/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+  - platform: mqtt
+    name: "Steckdose03"
+    # friendly_name: "Ventilator"
+    command_topic: "cmnd/sonoff03/POWER"
+    state_topic: "stat/sonoff03/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+
