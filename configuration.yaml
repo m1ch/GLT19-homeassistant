@@ -12,6 +12,21 @@ homeassistant:
   time_zone: Europe/Vienna
   # Customization file
   customize: !include customize.yaml
+  
+system_health:
+
+zone 1:
+  name: Home
+  latitude: !secret lat
+  longitude: !secret lon
+  radius: 40
+
+zone 2:
+  name: Uni
+  icon: mdi:factory
+  latitude: 47.0582215
+  longitude: 15.4600619
+  radius: 90
 
 #panel_iframe:
 #  configurator:
