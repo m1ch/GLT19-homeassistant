@@ -62,6 +62,7 @@ discovery:
 
 # Sensors
 sensor:
+  - platform: demo
   # Weather prediction
   - platform: yr
   
@@ -75,6 +76,7 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 
 light:
+  - platform: demo
   - platform: mqtt
     name: "LED light"
     # command_topic: "/br38/sonoff/switch/SONOFF_A751BC/relay/0"
@@ -97,6 +99,7 @@ light:
     # retain: true
 
 switch:
+  - platform: demo
   - platform: mqtt
     name: "Steckdose01"
     # friendly_name: "Ventilator"
