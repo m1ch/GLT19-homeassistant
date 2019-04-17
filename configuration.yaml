@@ -12,7 +12,19 @@ homeassistant:
   time_zone: Europe/Vienna
   # Customization file
   customize: !include customize.yaml
-  
+
+logger:
+  default: error
+  logs:
+    homeassistant.core: warning
+#     asyncio: debug
+#     homeassistant.components.cloud.iot: debug
+#    homeassistant.components.device_tracker: debug
+#    homeassistant.notify.rest: debug
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
 system_health:
 
 zone 1:
@@ -43,30 +55,60 @@ zone 2:
 
 mqtt:
 #  broker: hassio.local
-  broker: localhost
+  broker: !secret mqtt_host
   port: 1883
-  client_id: hass
+  client_id: glt_demo
   keepalive: 60
-  username: 'hass'
+  username: !secret mqtt_user
   password: !secret mqtt_pwd
   #  certificate: /home/paulus/dev/addtrustexternalcaroot.crt
   protocol: 3.1
   birth_message:
-    topic: 'hass/status'
+    topic: 'glt_demo/status'
     payload: 'online'
     qos: 1
     retain: true
   will_message:
-    topic: 'hass/status'
+    topic: 'glt_demo/status'
     payload: 'offline'
     qos: 1
     retain: true
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
-default_config:
+matrix:
+  homeserver: https://matrix.org
+  username: !secret matrix_name
+  password: !secret matrix_key
+  rooms:
+    - '#HomeAssistantOnGLT:matrix.org'
+  commands:
+    - word: sensor
+      name: get_sensorvalues
+    - word: help
+      name: get_help
+    - word: blindsopen
+      name: set_blindsopen
+    - word: lightsoff
+      name: set_lightsoff
+    - word: vacation
+      name: set_vacation
+    - word: time
+      name: get_time
+    - expression: "My name is (?P<name>.*)"
+      name: introduction
+
+notify:
+  - name: matrix_notify
+    platform: matrix
+    default_room: '#HomeAssistantOnGLT:matrix.org'
+
 
 # Show the introduction message on startup.
 introduction:
+
+# Text to speech
+tts:
+  - platform: google
+  - platform: demo
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 # http:
@@ -81,13 +123,9 @@ sensor:
   # Weather prediction
   - platform: yr
   
-
-# Text to speech
-tts:
-  - platform: google
-
 group: !include groups.yaml
 automation: !include automations.yaml
+automation old:   !include automations_old.yaml
 script: !include scripts.yaml
 
 light:
@@ -145,4 +183,39 @@ device_tracker:
     host: 192.168.1.1
     username: !secret ddwrt_user
     password: !secret ddwrt_pwd
-    
+  - platform: demo
+
+media_player:
+  - platform: kodi
+    host: !secret kodi_host
+  - platform: demo
+
+# Demo devices below this line
+air_quality: 
+  - platform: demo
+alarm_control_panel: 
+  - platform: demo
+binary_sensor: 
+  - platform: demo
+camera: 
+  - platform: demo
+climate: 
+  - platform: demo
+cover: 
+  - platform: demo
+fan: 
+  - platform: demo
+geo_location: 
+  - platform: demo
+image_processing: 
+  - platform: demo
+light: 
+  - platform: demo
+lock: 
+  - platform: demo
+mailbox: 
+  - platform: demo
+remote: 
+  - platform: demo
+weather: 
+  - platform: demo
