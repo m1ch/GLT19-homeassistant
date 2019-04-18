@@ -12,7 +12,7 @@ homeassistant:
   time_zone: Europe/Vienna
   # Customization file
   customize: !include customize.yaml
-  
+
 system_health:
 
 zone 1:
@@ -76,11 +76,7 @@ introduction:
 discovery:
 
 # Sensors
-sensor:
-  - platform: demo
-  # Weather prediction
-  - platform: yr
-  
+sensor: !include_dir_merge_list sensors/
 
 # Text to speech
 tts:
@@ -145,4 +141,3 @@ device_tracker:
     host: 192.168.1.1
     username: !secret ddwrt_user
     password: !secret ddwrt_pwd
-    
