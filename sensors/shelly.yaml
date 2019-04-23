@@ -1,0 +1,9 @@
+- platform: mqtt
+  name: "Shelly2 Power"
+  state_topic: "shellies/shellyswitch-55B707/relay/power"
+  unit_of_measurement: "Watts"    
+- platform: mqtt
+  name: "Shelly2 Energy"
+  state_topic: "shellies/shellyswitch-55B707/relay/energy" 
+  unit_of_measurement: "kWh" 
+  
