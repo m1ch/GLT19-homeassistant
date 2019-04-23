@@ -118,11 +118,12 @@ tts:
 discovery:
 
 # Sensors
-sensor:
-  - platform: demo
-  # Weather prediction
-  - platform: yr
-  
+sensor: !include_dir_merge_list sensors/
+
+# Text to speech
+tts:
+  - platform: google
+
 group: !include groups.yaml
 automation: !include automations.yaml
 automation old:   !include automations_old.yaml
@@ -177,6 +178,31 @@ switch:
     payload_on: "ON"
     payload_off: "OFF"
     optimistic: false
+  - platform: mqtt
+    name: "Shelly1 MQTT"
+    state_topic: "shellies/shelly1-555223/relay/0"
+    command_topic: "shellies/shelly1-555223/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false   
+  - platform: mqtt
+    name: "Shelly2 MQTT 1"
+    state_topic: "shellies/shellyswitch-55B707/relay/0"
+    command_topic: "shellies/shellyswitch-55B707/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+  - platform: mqtt
+    name: "Shelly2 MQTT 2"
+    state_topic: "shellies/shellyswitch-55B707/relay/1"
+    command_topic: "shellies/shellyswitch-55B707/relay/1/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+
+#shellies/shellyswitch-55B707/input/0 
+#shellies/shellyswitch-55B707/input/1
+
 
 device_tracker:
   - platform: ddwrt
