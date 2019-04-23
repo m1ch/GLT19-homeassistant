@@ -156,7 +156,6 @@ switch:
     payload_on: "on"
     payload_off: "off"
     retain: false
-	
 
 #shellies/shellyswitch-55B707/input/0 
 #shellies/shellyswitch-55B707/input/1
