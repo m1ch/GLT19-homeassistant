@@ -80,6 +80,7 @@ matrix:
   password: !secret matrix_key
   rooms:
     - '#HomeAssistantOnGLT:matrix.org'
+    - '#_oftc_#realraum:matrix.org'
   commands:
     - word: sensor
       name: get_sensorvalues
