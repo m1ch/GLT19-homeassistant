@@ -235,8 +235,6 @@ geo_location:
   - platform: demo
 image_processing: 
   - platform: demo
-light: 
-  - platform: demo
 lock: 
   - platform: demo
 mailbox: 
