@@ -1,4 +1,3 @@
----
 - platform: uptime
   name: uptime_min
   unit_of_measurement: minutes

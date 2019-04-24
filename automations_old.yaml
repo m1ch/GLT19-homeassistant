@@ -46,13 +46,13 @@
             {% endif %}
           {%- endfor %}
         #~ message: >
-          #~ {% for state in states.sensor -%}
-            #~ {%- if loop.first %}
-              #~ The {% elif loop.last %}
-              #~ and the  {% else %}
-              #~ the {% endif -%}
-            #~ {{ state.name | lower }} is {{state.state_with_unit}},
-          #~ {%- endfor -%}.
+          #  {% for state in states.sensor -%}
+          #    {%- if loop.first %}
+          #      The {% elif loop.last %}
+          #      and the  {% else %}
+          #      the {% endif -%}
+          #    {{ state.name | lower }} is {{state.state_with_unit}},
+          #  {%- endfor -%}.
 - id: matrix_000004
   alias: 'React to an introduction'
   trigger:
@@ -96,6 +96,17 @@
     event_type: matrix_command
     event_data:
       command: set_vacation
+  action:
+    - delay: 0:00:03
+    - service: notify.matrix_notify
+      data_template:
+        message: "No action defined jet"
+- id: matrix_000008
+  trigger:
+    platform: event
+    event_type: matrix_command
+    event_data:
+      command: set_light
   action:
     - delay: 0:00:03
     - service: notify.matrix_notify

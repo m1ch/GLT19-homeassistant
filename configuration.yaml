@@ -90,6 +90,8 @@ matrix:
       name: set_blindsopen
     - word: lightsoff
       name: set_lightsoff
+    - word: light
+      name: set_light
     - word: vacation
       name: set_vacation
     - word: time
@@ -217,6 +219,10 @@ media_player:
     host: !secret kodi_host
   - platform: demo
 
+weather:
+  - platform: zamg
+  - platform: demo
+
 # Demo devices below this line
 air_quality: 
   - platform: demo
@@ -241,6 +247,4 @@ lock:
 mailbox: 
   - platform: demo
 remote: 
-  - platform: demo
-weather: 
   - platform: demo
