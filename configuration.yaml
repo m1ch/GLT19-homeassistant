@@ -130,7 +130,6 @@ automation old:   !include automations_old.yaml
 script: !include scripts.yaml
 
 light:
-  - platform: demo
   - platform: mqtt
     name: "LED light"
     # command_topic: "/br38/sonoff/switch/SONOFF_A751BC/relay/0"
@@ -151,9 +150,9 @@ light:
     brightness_scale: 100
     optimistic: false
     # retain: true
+  - platform: demo
 
 switch:
-  - platform: demo
   - platform: mqtt
     name: "Steckdose01"
     # friendly_name: "Ventilator"
@@ -199,6 +198,7 @@ switch:
     payload_on: "on"
     payload_off: "off"
     retain: false
+  - platform: demo
 
 #shellies/shellyswitch-55B707/input/0 
 #shellies/shellyswitch-55B707/input/1
