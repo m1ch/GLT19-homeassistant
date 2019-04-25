@@ -152,13 +152,28 @@ light:
     brightness_value_template: "{{value_json.Dimmer}}"
     brightness_scale: 100
     optimistic: false
+  - platform: mqtt
+    name: "Shelly2 MQTT 1"
+    state_topic: "shellies/shellyswitch-55B707/relay/0"
+    command_topic: "shellies/shellyswitch-55B707/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+    optimistic: false
+  - platform: mqtt
+    name: "Shelly2 MQTT 2"
+    state_topic: "shellies/shellyswitch-55B707/relay/1"
+    command_topic: "shellies/shellyswitch-55B707/relay/1/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+    optimistic: false
     # retain: true
   - platform: demo
 
 switch:
   - platform: mqtt
     name: "Steckdose01"
-    # friendly_name: "Ventilator"
     command_topic: "cmnd/sonoff01/POWER"
     state_topic: "stat/sonoff01/POWER"
     payload_on: "ON"
@@ -166,7 +181,6 @@ switch:
     optimistic: false
   - platform: mqtt
     name: "Steckdose02"
-    # friendly_name: "Ventilator"
     command_topic: "cmnd/sonoff02/POWER"
     state_topic: "stat/sonoff02/POWER"
     payload_on: "ON"
@@ -188,19 +202,13 @@ switch:
     payload_off: "off"
     retain: false   
   - platform: mqtt
-    name: "Shelly2 MQTT 1"
-    state_topic: "shellies/shellyswitch-55B707/relay/0"
-    command_topic: "shellies/shellyswitch-55B707/relay/0/command"
-    payload_on: "on"
-    payload_off: "off"
-    retain: false
-  - platform: mqtt
-    name: "Shelly2 MQTT 2"
-    state_topic: "shellies/shellyswitch-55B707/relay/1"
-    command_topic: "shellies/shellyswitch-55B707/relay/1/command"
-    payload_on: "on"
-    payload_off: "off"
-    retain: false
+    name: "OBI1 MQTT"
+    friendly_name: "HT Stecker"
+    command_topic: "plug_2F5AE8/cmnd/POWER"
+    state_topic: "plug_2F5AE8/stat/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
   - platform: demo
 
 #shellies/shellyswitch-55B707/input/0 
