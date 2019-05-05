@@ -23,4 +23,7 @@ plex.conf
 .matrix.conf
 *.db
 *.log
+*.gz
+*.db-shm
+*.db-wal
 .HA_VERSION
