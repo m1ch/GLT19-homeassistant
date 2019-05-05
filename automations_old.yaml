@@ -101,6 +101,7 @@
     - service: notify.matrix_notify
       data_template:
         message: "No action defined jet"
+
 - id: matrix_000008
   trigger:
     platform: event
@@ -112,3 +113,37 @@
     - service: notify.matrix_notify
       data_template:
         message: "No action defined jet"
+
+- id: shellyswitch_1_kurz
+  trigger: 
+    platform: mqtt
+    topic: shellies/shellyswitch-55B707/input/1
+    payload: 1
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.shelly2_mqtt_1
+    - delay: 0:00:10
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.shelly2_mqtt_1
+  
+- id: shellyswitch_1_lang
+  trigger: 
+    platform: mqtt
+    topic: shellies/shellyswitch-55B707/longpush/1
+    payload: 1
+  action:
+    - service: light.toggle
+      data:
+        entity_id:
+          - light.shelly2_mqtt_1
+          - light.shelly2_mqtt_2
+
+
+    
+# shellies/shellyswitch-55B707/input/1 1
+# shellies/shellyswitch-55B707/input/1 0
+# shellies/shellyswitch-55B707/longpush/1 0
